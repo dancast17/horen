@@ -36,7 +36,6 @@ async function getGoogleSheetsClient() {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    console.log("Received data:", data); // 👈 LOG HERE
 
     const { email, phone } = data;
 
@@ -44,24 +43,22 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email || !emailRegex.test(email)) {
-      console.warn("Invalid email:", email); // 👈 LOG HERE
       return NextResponse.json({ error: 'Invalid or missing email address.' }, { status: 400 });
     }
 
     if (!phone || !phoneRegex.test(phone)) {
-      console.warn("Invalid phone:", phone); // 👈 LOG HERE
       return NextResponse.json({ error: 'Invalid or missing phone number.' }, { status: 400 });
     }
 
     const sheets = await getGoogleSheetsClient();
-    const phoneNumber = "+" + phone.replace(/\D/g, '');
+    const phoneNumber = "'+" + phone + "'";
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: `${SHEET_NAME}!${RANGE}`,
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       requestBody: {
-        values: [[email, phone]],
+        values: [[email, phoneNumber]],
       },
     });
 
