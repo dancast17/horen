@@ -9,9 +9,47 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Submitted:', { email, phone });
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    try {
+      const response = await fetch('/api/sheets', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, phone }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+      
+      setSubmitSuccess(true);
+      setEmail('');
+      setPhone('');
+      
+      // Hide form after successful submission
+      setTimeout(() => {
+        setShowForm(false);
+        // Reset success state after form is hidden
+        setTimeout(() => setSubmitSuccess(false), 500);
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit form');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) => {
@@ -33,9 +71,9 @@ export default function Home() {
           onClick={() => setShowForm(!showForm)}
           variant="outlined"
           sx={{
-            borderRadius: '4px',
-            border: '1px solid #a72420',
-            color: '#a72420',
+            borderRadius: '6px',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            color: 'white',
             fontWeight: 600,
             textTransform: 'uppercase',
             px: { xs: 2.5, sm: 3, md: 4 },
@@ -73,7 +111,7 @@ export default function Home() {
                 maxWidth: { xs: 350, sm: 400 },
                 mx: 'auto',
                 p: { xs: 3, sm: 4 },
-                borderRadius: '4px',
+                borderRadius: '8px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 2,
@@ -95,7 +133,7 @@ export default function Home() {
                       backdropFilter: 'blur(8px)', 
                       border: '1px solid rgba(255,255,255,0.3)',
                       color: 'white',
-                      borderRadius: '4px',
+                      borderRadius: '5px',
                       '&::placeholder': {
                         color: 'rgba(255,255,255,0.5)',
                       },
@@ -120,7 +158,7 @@ export default function Home() {
                       backgroundColor: '#000',
                       border: '1px solid rgba(255,255,255,0.3)',
                       color: 'white',
-                      borderRadius: '4px',
+                      borderRadius: '5px',
                       '&::placeholder': {
                         color: 'rgba(255,255,255,0.5)',
                       },
@@ -134,17 +172,35 @@ export default function Home() {
                 <Button
                   type="submit"
                   variant="solid"
+                  disabled={isSubmitting}
                   sx={{
-                    mt: { xs: 2, sm: 3 },
+                    borderRadius: '6px',
+                    mt: { xs: 2, sm: 3 },             
                     backgroundColor: '#a72420',
                     color: 'white',
                     '&:hover': {
                       backgroundColor: '#8a1d1a',
                     },
+                    '&:disabled': {
+                      backgroundColor: 'rgba(167, 36, 32, 0.5)',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    },
                   }}
                 >
-                  Submit
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
                 </Button>
+                
+                {submitSuccess && (
+                  <div className="text-green-500 text-sm mt-2">
+                    Thank you for joining us! You will keep you updated about the next dances. :)
+                  </div>
+                )}
+                
+                {submitError && (
+                  <div className="text-red-500 text-sm mt-2">
+                    {submitError}
+                  </div>
+                )}
               </form>
             </Sheet>
               </motion.div>
