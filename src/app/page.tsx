@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormControl, FormLabel, Input, Button, Sheet } from '@mui/joy';
 import { useRef, useEffect } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'; // default styles
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
@@ -63,7 +65,7 @@ export default function Home() {
         setShowForm(false);
         // Reset success state after form is hidden
         setTimeout(() => setSubmitSuccess(false), 500);
-      }, 2000);
+      }, 20000);
       
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -172,30 +174,45 @@ export default function Home() {
                   />
                 </FormControl>
 
-                <FormControl>
-                  <FormLabel sx={{ color: 'white', textTransform: 'uppercase', fontSize: 12 }}>
-                    Phone
-                  </FormLabel>
-                  <Input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => handleInputChange(e, setPhone)}
-                    placeholder="+351 912 345 678"
-                    required
-                    sx={{
-                      backgroundColor: '#000',
-                      border: '1px solid rgba(255,255,255,0.3)',
-                      color: 'white',
-                      borderRadius: '5px',
-                      '&::placeholder': {
-                        color: 'rgba(255,255,255,0.5)',
-                      },
-                      '&:focus': {
-                        borderColor: '#a72420',
-                      },
-                    }}
-                  />
-                </FormControl>
+                <PhoneInput
+                  country={'pt'}
+                  value={phone}
+                  onChange={(value) => setPhone(value)}
+                  inputStyle={{
+                    width: '100%',
+                    backgroundColor: '#000',
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    color: 'white',
+                    borderRadius: '5px',
+                    paddingLeft: '48px',
+                    height: '40px',
+                    fontSize: '14px',
+                  }}
+                  buttonStyle={{
+                    backgroundColor: '#1a1a1a',
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    borderTopLeftRadius: '5px',
+                    borderBottomLeftRadius: '5px',
+                  }}
+                  dropdownStyle={{
+                    backgroundColor: '#121212',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    padding: '4px 0',
+                    fontSize: '14px',
+                    maxHeight: '250px',
+                    overflowY: 'auto',
+                  }}
+                  containerStyle={{ width: '100%' }}
+                  inputProps={{
+                    required: true,
+                    name: 'phone',
+                  }}
+                />
+
+
 
                 <Button
                   type="submit"
@@ -220,7 +237,7 @@ export default function Home() {
                 
                 {submitSuccess && (
                   <div className="text-green-500 text-sm mt-2">
-                    Thank you for joining us! You will keep you updated about the next dances. :)
+                    Thank you for joining us! We will keep you updated about the next dances. :)
                   </div>
                 )}
                 
