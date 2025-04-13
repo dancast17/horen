@@ -59,31 +59,32 @@ body::after {
 body::before {
   background: var(--third-glow);
   border-radius: 50%;
-  width: min(50vw, 500px);
-  height: min(50vw, 500px);
+  width: clamp(200px, 40vw, 500px);
+  height: clamp(200px, 40vw, 500px);
   filter: blur(90px);
   top: 20vh;
   right: -10vw;
-  animation: animateBefore 14s ease-in-out infinite;
+  animation: animateBefore 13s ease-in-out infinite;
 }
 
 body::after {
   background: var(--secondary-glow);
   border-radius: 50%;
-  width: min(60vw, 600px);
-  height: min(60vw, 700px);
+  width: clamp(300px, 50vw, 600px);
+  height: clamp(300px, 60vw, 700px);
   filter: blur(90px);
   bottom: 10vh;
   left: -10vw;
-  animation: animateAfter 14s ease-in-out infinite;
+  animation: animateAfter 26s ease-in-out infinite;
 }
+
 
 @keyframes animateBefore {
   0% {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(-5vw, 10vh) scale(3.8);
+    transform: translate(-5vw, 10vh) scale(1.2);
   }
   100% {
     transform: translate(0, 0);
@@ -95,7 +96,7 @@ body::after {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(5vw, -10vh) scale(3.2);
+    transform: translate(5vw, -10vh) scale(1.8);
   }
   100% {
     transform: translate(0, 0);

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormControl, FormLabel, Input, Button, Sheet } from '@mui/joy';
+import { useRef, useEffect } from 'react';
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
@@ -12,7 +13,14 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const formRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    if (showForm && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [showForm]);
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -57,8 +65,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen w-full text-white relative overflow-hidden flex flex-col items-center justify-center px-3 sm:px-6 md:px-8 text-center max-w-[100vw]">
-      {/* Content */}
+<div className="min-h-screen w-full text-white relative overflow-hidden flex flex-col items-center justify-start pt-32 sm:pt-24 md:pt-20 px-3 sm:px-6 md:px-8 lg:pt-44	text-center max-w-[100vw]">
+{/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center space-y-4 sm:space-y-6">
         <h1 className="text-white text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[9rem] font-extrabold tracking-tight leading-none mx-auto w-full px-2">
           HÖREN
@@ -90,7 +98,7 @@ export default function Home() {
         </Button>
 
 
-        <div className="relative w-full min-h-[100px]">
+        <div ref={formRef} className="relative w-full min-h-[100px]">
           <AnimatePresence mode="wait">
             {showForm && (
               <motion.div
@@ -99,7 +107,7 @@ export default function Home() {
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 style={{ width: '100%', position: 'absolute', left: 0, right: 0 }}
-          >
+              >
             <Sheet
               component="div"
               variant="outlined"
