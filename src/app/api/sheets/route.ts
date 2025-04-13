@@ -1,4 +1,5 @@
-import { google } from 'googleapis';
+import { google, sheets_v4 } from 'googleapis';
+import { OAuth2Client } from 'google-auth-library';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Google Sheets configuration
@@ -8,25 +9,24 @@ const RANGE = 'A1'; // Start appending at the first row
 
 // Initialize Google Sheets client
 async function getGoogleSheetsClient() {
-  // Check if we have the required environment variables
   const credentials = process.env.GOOGLE_SHEETS_CREDENTIALS;
-  
   if (!credentials) {
     throw new Error('Missing Google Sheets credentials in environment variables');
   }
 
   try {
     const parsedCredentials = JSON.parse(credentials);
-    
+
     const auth = new google.auth.GoogleAuth({
       credentials: parsedCredentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
     const client = await auth.getClient();
-    // Create the sheets client with the correct typing
-    return google.sheets({ version: 'v4', auth: client });
-
+    return google.sheets({
+      version: 'v4',
+      auth: client as OAuth2Client, // ✅ fix here
+    });
   } catch (error) {
     console.error('Error initializing Google Sheets client:', error);
     throw error;
