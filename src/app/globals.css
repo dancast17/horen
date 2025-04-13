@@ -214,5 +214,5 @@ body::after {
 }
 
 .flag_no {
-  background-color: transparent;
+  margin-right: 10px;
 }
