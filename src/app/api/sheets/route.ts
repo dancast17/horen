@@ -25,10 +25,8 @@ async function getGoogleSheetsClient() {
 
     const client = await auth.getClient();
     // Create the sheets client with the correct typing
-    return google.sheets({
-      version: 'v4',
-      auth: client as any // Type assertion to bypass the type checking issue
-    });
+    return google.sheets({ version: 'v4', auth: client });
+
   } catch (error) {
     console.error('Error initializing Google Sheets client:', error);
     throw error;
