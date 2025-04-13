@@ -34,8 +34,8 @@ export default function Home() {
           variant="outlined"
           sx={{
             borderRadius: '4px',
-            border: '1px solid #a72420',
-            color: '#a72420',
+            border: '1px solid rgb(255, 255, 255)',
+            color: 'white',
             fontWeight: 600,
             textTransform: 'uppercase',
             px: { xs: 2.5, sm: 3, md: 4 },
