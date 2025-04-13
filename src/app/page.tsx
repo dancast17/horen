@@ -80,23 +80,28 @@ export default function Home() {
   return (
 <div className="min-h-screen w-full text-white relative overflow-hidden flex flex-col items-center justify-start pt-32 sm:pt-24 md:pt-20 px-3 sm:px-6 md:px-8 lg:pt-44	text-center max-w-[100vw]">
 {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center space-y-4 sm:space-y-6">
-        <h1 className="text-white text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[9rem] font-extrabold tracking-tight leading-none mx-auto w-full px-2">
+    <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center space-y-4 sm:space-y-6">
+      <div className="flex flex-col items-center leading-none">
+        <h1 className="text-white text-[5rem] sm:text-[5.5rem] md:text-[6.5rem] lg:text-[8.5rem] font-medium tracking-tight leading-none mx-auto w-full px-2">
           HÖREN
         </h1>
-        <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg tracking-widest uppercase">/ˈhøːʁən/</p>
-        <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg tracking-widest max-w-md mx-auto">Love above all.
+        <p className="text-white text-sm sm:text-sm md:text-base lg:text-lg font-bold tracking-widest uppercase">
+          /ˈhøːʁən/
         </p>
-
+        <p className="text-white text-sm sm:text-sm md:text-base lg:text-lg font-light tracking-widest pt-8">
+          Love above all.
+        </p>
+      </div>
         <Button
           onClick={() => setShowForm(!showForm)}
           variant="outlined"
           sx={{
             borderRadius: '6px',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            color: 'white',
+            border: '1px solid #a72420',
+            color: '#a72420',
             fontWeight: 600,
             textTransform: 'uppercase',
+            pt: 30,
             px: { xs: 2.5, sm: 3, md: 4 },
             py: { xs: 1, sm: 1.2, md: 1.5 },
             mb: 2,
