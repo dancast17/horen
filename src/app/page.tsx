@@ -236,9 +236,9 @@ export default function Home() {
                 </Button>
                 
                 {submitSuccess && (
-                  <div className="text-green-500 text-sm mt-2">
-                    Thank you for joining us! We will keep you updated about the next dances. :)
-                  </div>
+                  <div className="text-white-500 text-sm mt-2">
+                  Thank you for joining us! Expect to be added to our community in the next few days. We’re excited to have you with us for the upcoming dances. :)
+                </div>                
                 )}
                 
                 {submitError && (
