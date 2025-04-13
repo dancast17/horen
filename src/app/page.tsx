@@ -66,7 +66,8 @@ export default function Home() {
               component="div"
               variant="outlined"
               sx={{
-                backgroundColor: '#0a0000',
+                backgroundColor: 'rgba(10, 0, 0, 0.7)',
+                backdropFilter: 'blur(8px)', 
                 border: '1px solid rgba(255,255,255,0.15)',
                 width: '90%',
                 maxWidth: { xs: 350, sm: 400 },
@@ -90,7 +91,8 @@ export default function Home() {
                     placeholder="your@email.com"
                     required
                     sx={{
-                      backgroundColor: '#000',
+                      backgroundColor: 'rgba(10, 0, 0, 0.7)',
+                      backdropFilter: 'blur(8px)', 
                       border: '1px solid rgba(255,255,255,0.3)',
                       color: 'white',
                       borderRadius: '4px',
