@@ -38,13 +38,24 @@ export async function POST(request: NextRequest) {
     const data = await request.json();
     const { email, phone } = data;
 
-    // Validate input
-    if (!email || !phone) {
+    // Basic email & phone validation
+    const phoneRegex = /^\+?\d{9,15}$/; // accepts optional + and 9–15 digits
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email || !emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Email and phone are required' },
+        { error: 'Invalid or missing email address.' },
         { status: 400 }
       );
     }
+
+    if (!phone || !phoneRegex.test(phone)) {
+      return NextResponse.json(
+        { error: 'Invalid or missing phone number.' },
+        { status: 400 }
+      );
+    }
+
 
     // Get Google Sheets client
     const sheets = await getGoogleSheetsClient();

@@ -17,9 +17,22 @@ export default function Home() {
 
   useEffect(() => {
     if (showForm && formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Delay to let the animation/rendering complete before scrolling
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center', // Scroll to center instead of top
+        });
+      }, 350); // Match or slightly exceed your motion.div transition duration
     }
   }, [showForm]);
+
+  useEffect(() => {
+    if (!showForm) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [showForm]);
+    
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,6 +120,7 @@ export default function Home() {
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 style={{ width: '100%', position: 'absolute', left: 0, right: 0 }}
+                
               >
             <Sheet
               component="div"
@@ -119,6 +133,7 @@ export default function Home() {
                 maxWidth: { xs: 350, sm: 400 },
                 mx: 'auto',
                 p: { xs: 3, sm: 4 },
+                mb: { xs: 2, sm: 3 , lg: 120},
                 borderRadius: '8px',
                 display: 'flex',
                 flexDirection: 'column',

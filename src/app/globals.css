@@ -64,7 +64,7 @@ body::before {
   filter: blur(90px);
   top: 20vh;
   right: -10vw;
-  animation: animateBefore 13s ease-in-out infinite;
+  animation: animateBefore 8s ease-in-out infinite;
 }
 
 body::after {
@@ -75,7 +75,7 @@ body::after {
   filter: blur(90px);
   bottom: 10vh;
   left: -10vw;
-  animation: animateAfter 26s ease-in-out infinite;
+  animation: animateAfter 16s ease-in-out infinite;
 }
 
 
