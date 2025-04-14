@@ -32,6 +32,13 @@
     transparent 360deg
   );
 }
+html {
+  background-color: black;
+}
+
+body {
+  background-color: transparent;
+}
 
 
 html, body {
@@ -42,7 +49,6 @@ html, body {
   overflow-x: hidden;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
-  background-color: transparent;
 }
 
 h1 {
