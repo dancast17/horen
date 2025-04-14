@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     const sheets = await getGoogleSheetsClient();
-    const phoneNumber = "'+" + phone + "'";
+    const phoneNumber = "'+" + phone;
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: `${SHEET_NAME}!${RANGE}`,
