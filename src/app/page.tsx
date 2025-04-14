@@ -53,7 +53,8 @@ export default function Home() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit form');
+        setSubmitError(data.error || 'Failed to submit form');
+        return;
       }
       
       setSubmitSuccess(true);
@@ -236,7 +237,7 @@ export default function Home() {
                 </Button>
                 
                 {submitSuccess && (
-                  <div className="text-white-500 text-sm mt-2">
+                  <div className="text-white text-sm mt-2">
                   Thank you for joining us! Expect to be added to our community in the next few days. We’re excited to have you with us for the upcoming dances. :)
                 </div>                
                 )}
