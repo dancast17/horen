@@ -4,10 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 //import button
 import { Button } from '@mui/joy';
-import Navbar from '@/components/Navbar';
 
 export default function Home() {
-  const [open, setOpen] = useState(false);
   const [showUrl, setShowUrl] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
