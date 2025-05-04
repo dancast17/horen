@@ -7,8 +7,8 @@ import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
-
-
+import { hasCookie } from 'cookies-next';
+import { GoogleTagManager } from '@next/third-parties/google';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,20 +41,10 @@ export default function RootLayout({
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+        {typeof window !== "undefined" && hasCookie("consent") && (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+        )}
+
       </head>
 
       <body

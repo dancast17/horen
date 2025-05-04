@@ -85,7 +85,7 @@ export default function Home() {
                 className="w-full flex flex-col items-center"
               >
                 <a
-                  href="https://chat.whatsapp.com/CaN2MyoGqTF1fu9e8YcEQS"
+                  href="https://chat.whatsapp.com/JsDeaPO060lEpQfzeOozXU"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-lg md:text-xl font-bold text-center mt-2 px-6 py-3 rounded-lg transition-colors duration-300"
