@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
 
 
 const geistSans = Geist({
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hören",
+  title: "hören",
   description: "Love above all.",
 };
 
@@ -68,6 +69,7 @@ export default function RootLayout({
           <Suspense>
             <Analytics />
           </Suspense>
+          <CookieConsent />
           {children}
           <Footer />
         </ThemeProvider>

@@ -20,6 +20,7 @@
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
+    "cookies-next": "^5.1.0",
     "framer-motion": "^12.6.3",
     "googleapis": "^148.0.0",
     "lucide-react": "^0.473.0",
