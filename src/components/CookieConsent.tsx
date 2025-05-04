@@ -2,6 +2,7 @@
 
 import { setCookie, hasCookie } from "cookies-next";
 import { useState, useEffect } from "react";
+import { consent } from "nextjs-google-analytics";
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false);
@@ -15,11 +16,31 @@ const CookieConsent = () => {
   const acceptConsent = () => {
     setShowConsent(false);
     setCookie("consent", "true");
-    window.dispatchEvent(new Event("updateGTMConsent"));
+
+    consent({
+      arg: "update",
+      params: {
+        ad_storage: "granted",
+        analytics_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+      },
+    });
   };
 
   const declineConsent = () => {
     setShowConsent(false);
+    setCookie("consent", "false");
+
+    consent({
+      arg: "default",
+      params: {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      },
+    });
   };
 
   if (!showConsent) return null;

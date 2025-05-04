@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/Footer";
 import { Suspense } from "react";
 import CookieConsent from "@/components/CookieConsent";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import GaProvider from "@/components/GaProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,14 +44,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <GaProvider />
           <Suspense>
+            {children}
           </Suspense>
           <CookieConsent />
-          {children}
           <Footer />
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }
