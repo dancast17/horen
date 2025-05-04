@@ -31,7 +31,7 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center space-y-4 sm:space-y-6 pt-32 sm:pt-24 md:pt-20 lg:pt-44 text-center">
         <div className="flex flex-col items-center leading-none">
-          <h1 className="text-white text-[5rem] sm:text-[5.5rem] md:text-[6.5rem] lg:text-[8.5rem] font-medium tracking-tight leading-none mx-auto w-full px-2 font-montserrat" style={{ fontWeight: 'bold', letterSpacing: '-0.05em' }}>
+          <h1 className="text-white text-[5rem] sm:text-[5.5rem] md:text-[6.5rem] lg:text-[8.5rem] font-medium tracking-tight leading-none mx-auto w-full px-2 montserratArabic" style={{ fontWeight: 'bold', letterSpacing: '-0.05em' }}>
             hören
           </h1>
           <p className="text-white text-sm sm:text-sm md:text-base lg:text-lg font-bold tracking-widest uppercase">

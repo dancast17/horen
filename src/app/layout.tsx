@@ -4,14 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
+import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 
-// Add Montserrat Arabic font
-const montserratArabic = Geist({
-  subsets: ['latin'],
-  variable: '--font-montserrat-arabic',
-  display: 'swap',
-});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,7 +65,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Analytics />
+          <Suspense>
+            <Analytics />
+          </Suspense>
           {children}
           <Footer />
         </ThemeProvider>
