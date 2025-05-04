@@ -64,6 +64,7 @@ export default function Home() {
                     px: { xs: 2.5, sm: 3, md: 4 },
                     py: { xs: 1, sm: 1.2, md: 1.5 },
                     mb: 2,
+                    mt: 12,
                     '&:hover': {
                       backgroundColor: '#a72420',
                       color: 'white',
