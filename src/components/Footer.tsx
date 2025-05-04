@@ -6,7 +6,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="fixed bottom-0 left-0 right-0 bg-transparent pointer-events-none">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-4">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
         <div className="flex justify-center items-center">
           <Link
             href="https://www.instagram.com/horen.ong"
