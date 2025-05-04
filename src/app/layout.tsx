@@ -41,8 +41,7 @@ export default function RootLayout({
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
-
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
@@ -60,7 +59,6 @@ export default function RootLayout({
           <Footer />
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }
