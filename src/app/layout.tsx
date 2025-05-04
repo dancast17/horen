@@ -5,10 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { Suspense } from "react";
-import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
-import { hasCookie } from 'cookies-next';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,12 +40,8 @@ export default function RootLayout({
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
-        {typeof window !== "undefined" && hasCookie("consent") && (
-          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
-        )}
-
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
@@ -57,7 +52,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Suspense>
-            <Analytics />
           </Suspense>
           <CookieConsent />
           {children}
