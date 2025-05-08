@@ -8,10 +8,20 @@ import { Button } from '@mui/joy';
 export default function Home() {
   const [showUrl, setShowUrl] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [countdown, setCountdown] = useState(10);
 
   const handleButtonClick = () => {
     setShowUrl(true);
+    setCountdown(10);
     if (timerRef.current) clearTimeout(timerRef.current);
+    // Countdown updater
+    let secondsLeft = 10;
+    const interval = setInterval(() => {
+      secondsLeft--;
+      setCountdown(secondsLeft);
+      if (secondsLeft <= 0) clearInterval(interval);
+    }, 1000);
+    // Hide Link
     timerRef.current = setTimeout(() => {
       setShowUrl(false);
     }, 10000); // 10 seconds
@@ -41,16 +51,17 @@ export default function Home() {
             Love above all.
           </p>
         </div>
-        <div className="relative w-full min-h-[100px] flex flex-col items-center">
+        <div className="relative w-full min-h-[100px] flex flex-col items-center" style={{ marginTop: '8rem' }}>
           <AnimatePresence initial={false}>
-            {!showUrl && (
+          {!showUrl && (
               <motion.div
                 key="button"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                initial={{ opacity: 0, y: 80, transition: { duration: 0.5 } }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 1 } }}
+                exit={{ opacity: 0, y: -40 }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="w-full flex justify-center"
+                style={{ position: "absolute", zIndex: !showUrl ? 2 : 1 }}
               >
                 <Button
                   onClick={handleButtonClick}
@@ -63,8 +74,6 @@ export default function Home() {
                     textTransform: 'uppercase',
                     px: { xs: 2.5, sm: 3, md: 4 },
                     py: { xs: 1, sm: 1.2, md: 1.5 },
-                    mb: 2,
-                    mt: 12,
                     '&:hover': {
                       backgroundColor: '#a72420',
                       color: 'white',
@@ -79,27 +88,35 @@ export default function Home() {
             {showUrl && (
               <motion.div
                 key="url"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: 80, transition: { duration: 0.5 } }}
+                animate={{ opacity: 1, y: 0 , transition: { duration: 1 } }}
+                exit={{ opacity: 0, y: -40}}
                 transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="w-full flex flex-col items-center"
+                style={{ position: "absolute", zIndex: showUrl ? 2 : 1 }}
               >
-                <a
-                  href="https://chat.whatsapp.com/JsDeaPO060lEpQfzeOozXU"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg md:text-xl font-bold text-center mt-2 px-6 py-3 rounded-lg transition-colors duration-300"
-                  style={{
-                    background: 'rgba(26, 26, 26, 0.95)',
-                    color: '#a72420',
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderRadius: '6px',
                     border: '1px solid #a72420',
-                    boxShadow: '0 2px 24px 0 #a7242040',
+                    color: '#a72420',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    px: { xs: 2.5, sm: 3, md: 4 },
+                    py: { xs: 1, sm: 1.2, md: 1.5 },
+                    // mt: 12,
+                    '&:hover': {
+                      backgroundColor: '#a72420',
+                      color: 'white',
+                      borderColor: '#a72420',
+                    },
                   }}
+                  onClick={() => window.open('https://chat.whatsapp.com/JsDeaPO060lEpQfzeOozXU', '_blank')}
                 >
-                 Invite Link
-                </a>
-                <span className="text-xs text-white/60 mt-2">(Link will hide in 10 seconds)</span>
+                  Invite Link
+                </Button>
+                <span className="text-xs text-white/60 mt-2">(Link will hide in {countdown} seconds)</span>
               </motion.div>
             )}
           </AnimatePresence>
