@@ -5,6 +5,9 @@ import { useState } from "react";
 
 export default function Navbar({ current }: { current: "home" | "parties" }) {
   const [open, setOpen] = useState(false);
+  
+  const buttonClass = "fixed top-4 right-4 text-sm text-gray-400 hover:text-white border border-gray-700 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors z-50";
+
   return (
     <nav className="fixed top-0 right-0 w-full flex justify-end items-center px-4 py-4 z-50 bg-gradient-to-b from-black/80 via-black/60 to-transparent">
       {/* Overlay when menu is open */}
@@ -17,49 +20,11 @@ export default function Navbar({ current }: { current: "home" | "parties" }) {
       <div className="flex items-center gap-2 z-50">
         {/* Desktop links */}
         {current === "home" && (
-          <Link href="/parties" className="hidden sm:inline-block">
-            <Button
-              variant="outlined"
-              sx={{
-                borderRadius: '6px',
-                border: '1px solid #a72420',
-                color: '#a72420',
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                px: 2.5,
-                py: 1,
-                '&:hover': {
-                  backgroundColor: '#a72420',
-                  color: 'white',
-                  borderColor: '#a72420',
-                },
-              }}
-            >
-              Parties
-            </Button>
-          </Link>
-        )}
-        {current === "parties" && (
-          <Link href="/" className="hidden sm:inline-block">
-            <Button
-              variant="outlined"
-              sx={{
-                borderRadius: '6px',
-                border: '1px solid #a72420',
-                color: '#a72420',
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                px: 2.5,
-                py: 1,
-                '&:hover': {
-                  backgroundColor: '#a72420',
-                  color: 'white',
-                  borderColor: '#a72420',
-                },
-              }}
-            >
-              Home
-            </Button>
+            <Link 
+            href="/parties"
+            className="fixed top-4 right-4 text-sm text-gray-400 hover:text-white border border-gray-700 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors z-50 hidden sm:inline-block"
+          >
+          Parties
           </Link>
         )}
         {/* Mobile hamburger */}
@@ -83,16 +48,6 @@ export default function Navbar({ current }: { current: "home" | "parties" }) {
                 >
                   <span className="text-xl">•</span>
                   <span className="text-lg font-semibold">Parties</span>
-                </Link>
-              )}
-              {current === "parties" && (
-                <Link
-                  href="/"
-                  className="block px-4 py-3 text-[#a72420] hover:bg-[#a72420] hover:text-white rounded-lg transition-colors duration-200 flex items-center gap-3"
-                  onClick={() => setOpen(false)}
-                >
-                  <span className="text-xl">•</span>
-                  <span className="text-lg font-semibold">Home</span>
                 </Link>
               )}
             </div>

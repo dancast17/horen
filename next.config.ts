@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "imgproxy.ra.co",
+        hostname: "i.postimg.cc",
         pathname: "/**",
-      },
+      }
     ],
   },
 };

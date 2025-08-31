@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 //import button
 import { Button } from '@mui/joy';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   const [showUrl, setShowUrl] = useState(false);
@@ -36,7 +37,7 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full text-white relative overflow-hidden flex flex-col items-center justify-start max-w-[100vw]">
       
-      {/* <Navbar current="home" /> */}
+      <Navbar current="home" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center space-y-4 sm:space-y-6 pt-32 sm:pt-24 md:pt-20 lg:pt-44 text-center">
