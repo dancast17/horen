@@ -1,13 +1,14 @@
 "use client";
-"use client";
 import Image from "next/image";
-import Navbar from '@/components/Navbar';
+// import Navbar from '@/components/Navbar';
+import Link from 'next/link';
 import { useState, useCallback, useEffect } from "react";
 
 const flyers = [
   {
-    src: "https://imgproxy.ra.co/_/quality:100/aHR0cHM6Ly9pbWFnZXMucmEuY28vNDZiMjJhZDE0M2UyMDkxNjIxZTI3NmVmZTBkOTY4NWIwYzNhZmVmMS5wbmc=",
-    alt: "Party Flyer"
+    id: 'horen-28-06-2025',
+    src: "/horen_28_06_2025.jpg",
+    alt: "HÖREN - June 28, 2025"
   }
 ];
 
@@ -39,11 +40,18 @@ export default function Parties() {
 
   return (
     <main className="min-h-screen w-full bg-black text-white flex flex-col items-center px-2 pt-12 relative">
-      <Navbar current="parties" />
+      {/* <Navbar current="parties" /> */}
+      {/* Back to Home button in top right corner */}
+      <Link 
+        href="/" 
+        className="fixed top-4 right-4 text-sm text-gray-400 hover:text-white border border-gray-700 px-4 py-2 rounded-md hover:bg-gray-800 transition-colors z-50"
+      >
+        ← Back to Home
+      </Link>
       <h1 className="text-4xl font-bold mb-8 text-[#a72420] tracking-tight text-center mt-12">Parties</h1>
       <div className="flex flex-col items-center w-full max-w-2xl mx-auto">
         {flyers.map((flyer, idx) => (
-          <div key={idx} className="overflow-hidden shadow-lg bg-[#18181b] border border-[#a72420]/30 flex flex-col items-center p-2">
+          <div key={idx} className="overflow-hidden shadow-lg bg-[#18181b] border border-[#a72420]/30 flex flex-col items-center p-2 w-full">
             <Image
               src={flyer.src}
               alt={flyer.alt}
@@ -55,6 +63,12 @@ export default function Parties() {
               style={{ background: "#222" }}
             />
             <div className="mt-2 text-center text-sm text-white/70">{flyer.alt}</div>
+            <Link
+              href={`/parties/${flyer.id}`}
+              className="mt-4 px-6 py-2 bg-[#a72420] text-white rounded-md hover:bg-[#8c1d1a] transition-colors text-sm font-medium"
+            >
+              Photos
+            </Link>
           </div>
         ))}
       </div>
